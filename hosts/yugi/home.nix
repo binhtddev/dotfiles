@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  username = "binhtran432k";
+  username = "binhtd";
   homeDirectory = "/home/${username}";
 in
 {
@@ -15,8 +15,8 @@ in
     ../../home/alacritty.nix
     ../../home/fish.nix
     ../../home/git.nix
-    ../../home/ghostty.nix
-    # ../../home/helix.nix
+    # ../../home/ghostty.nix
+    ../../home/helix.nix
     ../../home/lazygit.nix
     ../../home/ripgrep.nix
     ../../home/yazi.nix
@@ -33,7 +33,7 @@ in
     # ../../home/wpaperd.nix
 
     ../../home/dev/python.nix
-    # ../../home/dev/rust.nix
+    ../../home/dev/rust.nix
     ../../home/dev/tree-sitter.nix
   ];
 
@@ -55,16 +55,15 @@ in
       mknews = "home-manager news --flake ${homeDirectory}/dotfiles#yugi";
     };
     sessionVariables = {
-      BROWSER = "${pkgs.brave}/bin/brave";
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
       NIXOS_OZONE_WL = "1";
     };
     packages = with pkgs; [
       ### Browser
-      brave
+      # brave
       google-chrome
       ### Mail
-      # thunderbird
+      thunderbird
       ### Learning
       exercism
       ### Office
@@ -96,8 +95,8 @@ in
       ### Dev markdown
       # marksman
       ### Dev Node
-      bun
-      # pnpm
+      # bun
+      pnpm
       nodejs
       ### Dev Html/Css/Json/JS
       # vscode-langservers-extracted
@@ -108,7 +107,7 @@ in
       # biome
       # nodePackages.prettier
       ### Dev zig
-      zig_0_15
+      # zig_0_15
       # zls_0_15
     ];
 

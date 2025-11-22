@@ -30,7 +30,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "yugi-binhtran432k";
+  networking.hostName = "yugi-binhtd";
 
   # Set your time zone.
   time.timeZone = "Asia/Ho_Chi_Minh";
@@ -55,7 +55,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
-    binhtran432k = {
+    binhtd = {
       isNormalUser = true;
       initialPassword = "changeme";
       extraGroups = [

@@ -5,7 +5,7 @@
     settings = {
       user = {
         name = "Binh Tran";
-        email = "binhtran432k@gmail.com";
+        email = "binhtd.dev@gmail.com";
       };
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
