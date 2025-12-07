@@ -13,7 +13,10 @@
       noto-fonts-cjk-sans
 
       # Mono
-      maple-mono.NF
+      bifont
+
+      # Nerd
+      nerd-fonts.symbols-only
     ];
     fontconfig.defaultFonts = {
       serif = [
@@ -25,7 +28,7 @@
         "Noto Color Emoji"
       ];
       monospace = [
-        "Maple Mono NF"
+        "Bifont"
         "Noto Sans Mono"
         "Noto Color Emoji"
       ];
