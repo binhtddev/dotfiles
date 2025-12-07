@@ -8,6 +8,7 @@
     ]))
   ]
   ++ (with pkgs; [
+    uv
     ty
   ]);
 }
