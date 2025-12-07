@@ -5,7 +5,7 @@
       # Add overlays flake exports (from overlays and pkgs dir)
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.stable-packages
+      outputs.overlays.unstable-packages
 
       # Add overlays exported from other flakes
       # inputs.neovim-nightly-overlay.overlays.default

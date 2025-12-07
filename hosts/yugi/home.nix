@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, outputs, ... }:
 let
   username = "binhtd";
   homeDirectory = "/home/${username}";
@@ -22,15 +22,15 @@ in
     ../../home/yazi.nix
     ../../home/zellij.nix
 
-    # ../../home/desktop.nix
-    # ../../home/fuzzel.nix
-    # ../../home/i3status.nix
-    # ../../home/mako.nix
-    # ../../home/niri.nix
-    # ../../home/swaylock.nix
-    # ../../home/systemd/eye-strain.nix
-    # ../../home/waybar.nix
-    # ../../home/wpaperd.nix
+    ../../home/desktop.nix
+    ../../home/fuzzel.nix
+    ../../home/i3status.nix
+    ../../home/mako.nix
+    ../../home/niri.nix
+    ../../home/swaylock.nix
+    ../../home/systemd/eye-strain.nix
+    ../../home/waybar.nix
+    ../../home/wpaperd.nix
 
     ../../home/dev/python.nix
     ../../home/dev/rust.nix
@@ -58,6 +58,9 @@ in
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
       NIXOS_OZONE_WL = "1";
     };
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
     packages = with pkgs; [
       ### Browser
       # brave
@@ -79,6 +82,9 @@ in
       vscode
       lefthook
       vim
+      nerd-font-patcher
+      python313Packages.opentype-feature-freezer
+      dragon-drop
       ### Dev Yaml
       # yaml-language-server
       ### Dev C/C++

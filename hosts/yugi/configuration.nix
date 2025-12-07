@@ -21,9 +21,9 @@
     ../../nixos/sound.nix
     ../../nixos/touchpad.nix
 
-    # ../../nixos/niri.nix
+    ../../nixos/niri.nix
     # ../../nixos/cosmic.nix
-    ../../nixos/plasma.nix
+    # ../../nixos/plasma.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

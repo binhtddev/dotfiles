@@ -8,9 +8,10 @@ args@{ pkgs, ... }:
     waybar.enable = true;
   };
   home.packages = with pkgs; [
+    adwaita-icon-theme # for lacking icon in gtk apps
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     libnotify # notify-send
     xwayland-satellite
-    wl-clipboard
     (import ./niri/scripts/switch_brightness.nix args)
     (import ./niri/scripts/mycontrol.nix args)
     (import ./niri/scripts/mypower.nix args)
