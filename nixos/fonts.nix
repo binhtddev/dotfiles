@@ -30,6 +30,7 @@
       monospace = [
         "Bifont"
         "Noto Sans Mono"
+        "Symbols Nerd Font"
         "Noto Color Emoji"
       ];
       emoji = [ "Noto Color Emoji" ];

@@ -3,20 +3,20 @@
 }:
 let
   pname = "bifont";
-  version = "0.0";
+  version = "0.0.1";
 in
 pkgs.stdenv.mkDerivation {
   inherit pname version;
 
   src = pkgs.fetchzip {
-    url = "https://github.com/binhtddev/bifont/archive/refs/tags/v${version}.zip";
-    sha256 = "sha256-a7nkIBrVzfLZ6gn1r/zs9YbFfeRG7C3/33lwkOl3wjw=";
+    url = "https://github.com/binhtddev/bifont/releases/download/v${version}/bifont.zip";
+    sha256 = "sha256-5QgrFf8MuhrDBxZj2Xxvx65zG9stBc1BOCryqbPMqM8=";
     stripRoot = false;
   };
 
   installPhase = ''
     runHook preInstall
-    install -Dm644 ${pname}-${version}/*.ttf -t $out/share/fonts/truetype
+    install -Dm644 *.ttf -t $out/share/fonts/truetype
     runHook postInstall
   '';
 }
