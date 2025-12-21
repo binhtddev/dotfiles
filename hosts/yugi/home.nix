@@ -106,6 +106,7 @@ in
       yaml-language-server
       ### Dev C/C++
       clang-tools
+      gcc
       ### Dev Nix
       nil
       nixfmt
@@ -133,6 +134,9 @@ in
       ### Dev zig
       zig_0_15
       zls_0_15
+      ### Dev treesitter
+      tree-sitter
+      node-gyp
     ];
 
     # This value determines the Home Manager release that your configuration is
