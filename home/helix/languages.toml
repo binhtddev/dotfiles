@@ -8,7 +8,7 @@ roots = ["."]
 
 [[language]]
 name = "ghostty"
-file-types = [{ glob = "ghostty/config" }, { glob = "ghostty/themes/*" }]
+file-types = [{ glob = "*.ghostty" }]
 
 [[language]]
 name = "jsonc"
