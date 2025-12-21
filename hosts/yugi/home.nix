@@ -1,4 +1,8 @@
-{ config, pkgs, outputs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 let
   username = "binhtd";
   homeDirectory = "/home/${username}";
@@ -15,7 +19,7 @@ in
     ../../home/alacritty.nix
     ../../home/fish.nix
     ../../home/git.nix
-    # ../../home/ghostty.nix
+    ../../home/ghostty.nix
     ../../home/helix.nix
     ../../home/lazygit.nix
     ../../home/ripgrep.nix
@@ -33,14 +37,27 @@ in
     ../../home/wpaperd.nix
 
     ../../home/dev/python.nix
-    ../../home/dev/rust.nix
+    # ../../home/dev/rust.nix
     ../../home/dev/tree-sitter.nix
   ];
 
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
+  programs = {
+    # Enable home-manager and git
+    home-manager.enable = true;
 
-  programs.helix.defaultEditor = true;
+    # programs.helix.defaultEditor = true;
+    neovim.defaultEditor = true;
+
+    neovim.enable = true;
+    bash.enable = true;
+    eza.enable = true;
+    zoxide.enable = true;
+    # git = {
+    #   settings = {
+    #     core.editor = "code --wait";
+    #   };
+    # };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
@@ -83,38 +100,39 @@ in
       lefthook
       vim
       nerd-font-patcher
-      python313Packages.opentype-feature-freezer
+      # python313Packages.opentype-feature-freezer
       dragon-drop
       ### Dev Yaml
-      # yaml-language-server
+      yaml-language-server
       ### Dev C/C++
-      # clang-tools
+      clang-tools
       ### Dev Nix
       nil
       nixfmt
+      statix
       ### Dev toml
-      # taplo
+      taplo
       ### Dev go
-      # go
+      go
       # gopls
       # golangci-lint-langserver
       ### Dev markdown
-      # marksman
+      marksman
       ### Dev Node
-      # bun
+      bun
       pnpm
       nodejs
       ### Dev Html/Css/Json/JS
-      # vscode-langservers-extracted
+      vscode-langservers-extracted
       typescript
-      # typescript-language-server
-      # emmet-language-server
+      typescript-language-server
+      emmet-language-server
       ### Web Formatter
       # biome
-      # nodePackages.prettier
+      nodePackages.prettier
       ### Dev zig
-      # zig_0_15
-      # zls_0_15
+      zig_0_15
+      zls_0_15
     ];
 
     # This value determines the Home Manager release that your configuration is
@@ -125,16 +143,6 @@ in
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     stateVersion = "24.05"; # Please read the comment before changing.
-  };
-  programs = {
-    bash.enable = true;
-    eza.enable = true;
-    zoxide.enable = true;
-    git = {
-      settings = {
-        core.editor = "code --wait";
-      };
-    };
   };
   lib.file.mkDotfilesSymlink = link: {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${link}";
