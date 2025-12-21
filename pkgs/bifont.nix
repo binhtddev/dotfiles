@@ -3,14 +3,14 @@
 }:
 let
   pname = "bifont";
-  version = "0.0.1";
+  version = "0.0.2";
 in
 pkgs.stdenv.mkDerivation {
   inherit pname version;
 
   src = pkgs.fetchzip {
     url = "https://github.com/binhtddev/bifont/releases/download/v${version}/bifont.zip";
-    sha256 = "sha256-5QgrFf8MuhrDBxZj2Xxvx65zG9stBc1BOCryqbPMqM8=";
+    sha256 = "sha256-T+gLf+4eusWkDuUu6xyeGrT8p0fkk6IxrhnyaIh54P8=";
     stripRoot = false;
   };
 
