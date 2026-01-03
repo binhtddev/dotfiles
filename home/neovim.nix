@@ -15,8 +15,8 @@
       fzf
       fd
       ### typescript-tools
-      nodejs
-      typescript
+      # nodejs
+      # typescript
     ];
   };
 }

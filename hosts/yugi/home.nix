@@ -22,6 +22,7 @@ in
     ../../home/ghostty.nix
     ../../home/helix.nix
     ../../home/lazygit.nix
+    ../../home/neovim.nix
     ../../home/ripgrep.nix
     ../../home/yazi.nix
     ../../home/zellij.nix
@@ -38,7 +39,6 @@ in
 
     ../../home/dev/python.nix
     # ../../home/dev/rust.nix
-    ../../home/dev/tree-sitter.nix
   ];
 
   programs = {
@@ -48,7 +48,6 @@ in
     # programs.helix.defaultEditor = true;
     neovim.defaultEditor = true;
 
-    neovim.enable = true;
     bash.enable = true;
     eza.enable = true;
     zoxide.enable = true;

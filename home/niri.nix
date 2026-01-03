@@ -16,13 +16,25 @@ args@{ pkgs, ... }:
     (import ./niri/scripts/mycontrol.nix args)
     (import ./niri/scripts/mypower.nix args)
   ];
-  xdg.configFile."niri/config.kdl".source = ./niri/config.kdl;
-  xdg.configFile."systemd/user/niri.service.wants/mako.service".source =
-    "${pkgs.mako}/lib/systemd/user/mako.service";
-  xdg.configFile."systemd/user/niri.service.wants/xwayland-satellite.service".source =
-    "${pkgs.xwayland-satellite}/lib/systemd/user/xwayland-satellite.service";
-  xdg.configFile."systemd/user/niri.service.wants/waybar.service".source =
-    "${pkgs.waybar}/lib/systemd/user/waybar.service";
+  xdg = {
+    configFile = {
+      "niri/config.kdl".source = ./niri/config.kdl;
+      "systemd/user/niri.service.wants/mako.service".source =
+        "${pkgs.mako}/lib/systemd/user/mako.service";
+      "systemd/user/niri.service.wants/xwayland-satellite.service".source =
+        "${pkgs.xwayland-satellite}/lib/systemd/user/xwayland-satellite.service";
+      "systemd/user/niri.service.wants/waybar.service".source =
+        "${pkgs.waybar}/lib/systemd/user/waybar.service";
+    };
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+      ];
+      config.common.default = "*";
+    };
+  };
   systemd.user.services = {
     eye-strain-notify.Install.WantedBy = [ "niri.service" ];
     stretch-notify.Install.WantedBy = [ "niri.service" ];
@@ -33,18 +45,12 @@ args@{ pkgs, ... }:
       Install.WantedBy = [ "niri.service" ];
       Service.ExecStart = "${pkgs.gammastep}/bin/gammastep -O3000";
       Service.Restart = "on-failure";
-      Unit.Description = "Display colour temperature adjustment";
-      Unit.PartOf = "graphical-session.target";
-      Unit.After = "graphical-session.target";
+      Unit = {
+        Description = "Display colour temperature adjustment";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
     };
-  };
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
-    ];
-    config.common.default = "*";
   };
   services = {
     mako.enable = true;
