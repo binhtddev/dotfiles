@@ -19,7 +19,7 @@ in
     ../../home/alacritty.nix
     ../../home/fish.nix
     ../../home/git.nix
-    ../../home/ghostty.nix
+    # ../../home/ghostty.nix
     ../../home/helix.nix
     ../../home/lazygit.nix
     ../../home/neovim.nix
@@ -29,7 +29,7 @@ in
 
     ../../home/desktop.nix
     ../../home/fuzzel.nix
-    ../../home/i3status.nix
+    # ../../home/i3status.nix
     ../../home/mako.nix
     ../../home/niri.nix
     ../../home/swaylock.nix
@@ -38,7 +38,7 @@ in
     ../../home/wpaperd.nix
 
     ../../home/dev/python.nix
-    # ../../home/dev/rust.nix
+    ../../home/dev/rust.nix
   ];
 
   programs = {
@@ -113,7 +113,7 @@ in
       ### Dev toml
       taplo
       ### Dev go
-      go
+      # go
       # gopls
       # golangci-lint-langserver
       ### Dev markdown
@@ -129,10 +129,10 @@ in
       emmet-language-server
       ### Web Formatter
       # biome
-      nodePackages.prettier
+      # nodePackages.prettier
       ### Dev zig
-      zig_0_15
-      zls_0_15
+      # zig_0_15
+      # zls_0_15
       ### Dev treesitter
       tree-sitter
       node-gyp

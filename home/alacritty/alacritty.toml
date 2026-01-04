@@ -4,14 +4,16 @@ import = ["themes/dracutux.toml"]
 [[keyboard.bindings]]
 mods = "Control"
 key = "["
-chars = "\u001b"
+chars = "\u001b" # Esc
 
 [[keyboard.bindings]]
 mods = "Control"
 key = "j"
-chars = "\u0009"
+# chars = "\u0009" # Tab
+chars = "\u001b[B" # Down
 
 [[keyboard.bindings]]
 mods = "Control"
 key = "k"
-chars = "\u001b[Z"
+# chars = "\u001b[Z" # Shift + Tab
+chars = "\u001b[A" # Up

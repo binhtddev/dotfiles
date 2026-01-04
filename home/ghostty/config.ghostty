@@ -36,11 +36,20 @@ font-family = monospace
 # window-decoration = none
 
 # Hack Esc Key
+# Esc
 keybind = ctrl+left_bracket=text:\x1b
+# Shift + Tab
 # keybind = ctrl+k=text:\x1b[Z
+# Tab
 # keybind = ctrl+j=text:\x09
-keybind = ctrl+k=text:\x10
-keybind = ctrl+j=text:\x0e
+# Ctrl + p
+# keybind = ctrl+k=text:\x10
+# Ctrl + n
+# keybind = ctrl+j=text:\x0e
+# Up
+keybind = ctrl+k=text:\x1b[A
+# Down
+keybind = ctrl+j=text:\x1b[B
 
 ### Disalbe Alt+[number] for zellij
 
