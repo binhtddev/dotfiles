@@ -39,6 +39,7 @@ in
     ../../home/wpaperd.nix
 
     # ../../home/dev/go.nix
+    ../../home/dev/moonbit.nix
     ../../home/dev/python.nix
     ../../home/dev/rust.nix
     ../../home/dev/tree-sitter.nix
