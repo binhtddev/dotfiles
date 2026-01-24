@@ -47,9 +47,9 @@ keybind = ctrl+left_bracket=text:\x1b
 # Ctrl + n
 # keybind = ctrl+j=text:\x0e
 # Up
-keybind = ctrl+k=text:\x1b[A
-# Down
-keybind = ctrl+j=text:\x1b[B
+# keybind = ctrl+k=text:\x1b[A
+# # Down
+# keybind = ctrl+j=text:\x1b[B
 
 ### Disalbe Alt+[number] for zellij
 

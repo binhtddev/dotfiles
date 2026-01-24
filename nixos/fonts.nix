@@ -14,26 +14,10 @@
 
       # Mono
       bifont
+      maple-mono.NF
 
       # Nerd
       nerd-fonts.symbols-only
     ];
-    fontconfig.defaultFonts = {
-      serif = [
-        "Noto Serif"
-        "Noto Color Emoji"
-      ];
-      sansSerif = [
-        "Noto Sans"
-        "Noto Color Emoji"
-      ];
-      monospace = [
-        "Bifont"
-        "Noto Sans Mono"
-        "Symbols Nerd Font"
-        "Noto Color Emoji"
-      ];
-      emoji = [ "Noto Color Emoji" ];
-    };
   };
 }

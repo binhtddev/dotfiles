@@ -18,6 +18,7 @@ in
 
     ../../home/alacritty.nix
     ../../home/fish.nix
+    ../../home/fonts.nix
     ../../home/git.nix
     # ../../home/ghostty.nix
     ../../home/helix.nix
@@ -37,8 +38,11 @@ in
     ../../home/waybar.nix
     ../../home/wpaperd.nix
 
+    # ../../home/dev/go.nix
     ../../home/dev/python.nix
     ../../home/dev/rust.nix
+    ../../home/dev/tree-sitter.nix
+    # ../../home/dev/zig.nix
   ];
 
   programs = {
@@ -112,14 +116,10 @@ in
       statix
       ### Dev toml
       taplo
-      ### Dev go
-      # go
-      # gopls
-      # golangci-lint-langserver
       ### Dev markdown
       marksman
       ### Dev Node
-      bun
+      # bun
       pnpm
       nodejs
       ### Dev Html/Css/Json/JS
@@ -130,12 +130,6 @@ in
       ### Web Formatter
       # biome
       # nodePackages.prettier
-      ### Dev zig
-      # zig_0_15
-      # zls_0_15
-      ### Dev treesitter
-      tree-sitter
-      node-gyp
     ];
 
     # This value determines the Home Manager release that your configuration is
