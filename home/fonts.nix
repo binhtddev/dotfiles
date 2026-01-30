@@ -11,8 +11,8 @@
         "Noto Color Emoji"
       ];
       monospace = [
-        "Maple Mono NF"
-        # "Bifont"
+        # "Maple Mono NF"
+        "Bifont"
         "Noto Sans Mono"
         "Symbols Nerd Font"
         "Noto Color Emoji"

@@ -20,7 +20,7 @@ in
     ../../home/fish.nix
     ../../home/fonts.nix
     ../../home/git.nix
-    # ../../home/ghostty.nix
+    ../../home/ghostty.nix
     ../../home/helix.nix
     ../../home/lazygit.nix
     ../../home/neovim.nix
@@ -38,12 +38,12 @@ in
     ../../home/waybar.nix
     ../../home/wpaperd.nix
 
-    # ../../home/dev/go.nix
+    ../../home/dev/go.nix
     ../../home/dev/moonbit.nix
     ../../home/dev/python.nix
-    ../../home/dev/rust.nix
+    # ../../home/dev/rust.nix
     ../../home/dev/tree-sitter.nix
-    # ../../home/dev/zig.nix
+    ../../home/dev/zig.nix
   ];
 
   programs = {
