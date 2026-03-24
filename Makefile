@@ -1,3 +1,18 @@
+.PHONY: paru
+paru:
+	rm -rf paru
+	git clone --depth=1 https://aur.archlinux.org/paru.git paru
+	cd paru && makepkg -si
+
+.PHONY: plasma
+plasma:
+	pacman -S \
+	  plasma-desktop \
+	  plasma-nm \
+	  plasma-pa \
+	  sddm-kcm \
+	  kwallet-pam
+
 .PHONY: joey
 joey:
 	nixos-rebuild switch --flake ".#joey" --sudo
