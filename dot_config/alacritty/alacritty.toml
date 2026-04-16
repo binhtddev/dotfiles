@@ -1,13 +1,25 @@
 [general]
-import = ["~/.config/alacritty/themes/dracutux.toml"]
+import = ["themes/dracutux.toml"]
+
+# [[keyboard.bindings]]
+# mods = "Control"
+# key = "["
+# chars = "\u001b" # Esc
+
+# [[keyboard.bindings]]
+# mods = "Control"
+# key = "j"
+# # chars = "\u0009" # Tab
+# chars = "\u001b[B" # Down
+
+# [[keyboard.bindings]]
+# mods = "Control"
+# key = "k"
+# # chars = "\u001b[Z" # Shift + Tab
+# chars = "\u001b[A" # Up
 
 # [terminal]
 # shell = "fish"
 
-[window]
-decorations = "none"
-
-# [keyboard]
-# bindings = [
-#   { key = "LBracket", mods = "Control", chars = "\u001b" },
-# ]
+# [window]
+# decorations = "none"
