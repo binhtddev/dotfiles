@@ -1,7 +1,10 @@
 return {
   -- { import = "plugins.lang.gherkin" },
+  { import = "plugins.lang.json" },
+  { import = "plugins.lang.rust" },
+  { import = "plugins.lang.moonbit" },
   {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter",
     opts = {
       ensure_installed = {
         "css",
@@ -10,13 +13,18 @@ return {
         "make",
         "kdl",
         "mermaid",
-        "superhtml",
-        "ziggy",
+        -- "superhtml",
+        -- "ziggy",
       },
     },
   },
   {
-    "neovim/nvim-lspconfig",
+    "bezhermoso/tree-sitter-ghostty",
+    build = "make nvim_install",
+    ft = "ghostty",
+  },
+  {
+    "nvim-lspconfig",
     opts = {
       diagnostics = {
         float = {
@@ -24,7 +32,6 @@ return {
         },
       },
       servers = {
-        biome = {},
         cssls = {},
         html = {},
         unocss = {
@@ -36,24 +43,21 @@ return {
     },
   },
   {
-    "rustaceanvim",
-    opts = {
-      server = {
-        default_settings = {
-          ["rust-analyzer"] = {
-            check = { command = "check" },
-            -- checkOnSave = false,
-          },
-        },
-      },
-    },
+    "nvim-lspconfig",
+    opts = function(_, opts)
+      if opts.servers and opts.servers["*"] and opts.servers["*"].keys then
+        opts.servers["*"].keys = vim.tbl_filter(function(key)
+          return key[1] ~= "<c-k>"
+        end, opts.servers["*"].keys)
+      end
+    end,
   },
   {
     "conform.nvim",
     opts = {
-      formatters_by_ft = {
-        nix = { "alejandra" },
-      },
+      -- formatters_by_ft = {
+      --   nix = { "alejandra" },
+      -- },
     },
   },
   {
@@ -81,18 +85,25 @@ return {
         end
       end
 
-      local disabled_method_map = {
-        ["textDocument/formatting"] = true,
-        ["textDocument/rangeFormatting"] = true,
+      local disabled_map = {
+        formatting = {
+          methods = {
+            ["textDocument/formatting"] = true,
+            ["textDocument/rangeFormatting"] = true,
+          },
+          clients = {
+            jsonls = true,
+            lua_ls = true,
+          },
+        },
       }
       local origin_supports_method = vim.lsp.client.supports_method
       vim.lsp.client.supports_method = function(self_client, method, ...)
-        if disabled_method_map[method] then
+        if disabled_map.formatting.methods[method] and disabled_map.formatting.clients[self_client.name] then
           return false
         end
         return origin_supports_method(self_client, method, ...)
       end
-
     end,
   },
   {

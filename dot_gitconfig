@@ -1,6 +1,6 @@
 # vim:ft=gitconfig
 [user]
-	email = binhtran432k@gmail.com
+	email = binhtd.dev@gmail.com
 	name = Binh Tran
 
 [init]

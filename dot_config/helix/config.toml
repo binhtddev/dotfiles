@@ -38,6 +38,7 @@ tabpad = "·" # Tabs will look like "→···" (depending on tab width)
 
 [editor.lsp]
 display-inlay-hints = true
+inlay-hints-length-limit = 30
 
 [editor.indent-guides]
 render = true

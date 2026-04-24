@@ -46,11 +46,12 @@ if vim.fn.has("wsl") == 1 then
   }
 end
 
+vim.o.spelllang = "en,vi"
 vim.o.spelloptions = "camel,noplainbuffer"
 
 -- vim.lsp.set_log_level("trace")
 
-require("vim.lsp.log").set_format_func(vim.inspect)
+-- require("vim.lsp.log").set_format_func(vim.inspect)
 
 vim.filetype.add({
   pattern = {
@@ -58,6 +59,6 @@ vim.filetype.add({
   },
 })
 
-vim.g.lazyvim_python_lsp = "basedpyright"
-
 vim.treesitter.language.register("c_sharp", "csharp")
+
+vim.g.lazyvim_ts_lsp = "tsgo"

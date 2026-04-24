@@ -8,12 +8,14 @@ if not string match -q -- "$HOME/.local/bin" $PATH
 end
 
 if type -q helix
-    alias hx="helix"
+    if not type -q hx
+        alias hx="helix"
+    end
     export EDITOR=helix
-else if type -q nvim
-    export EDITOR=nvim
 else if type -q hx
     export EDITOR=hx
+else if type -q nvim
+    export EDITOR=nvim
 else if type -q vim
     export EDITOR=vim
 else if type -q vi
@@ -51,3 +53,6 @@ if not string match -q -- $ZVM_INSTALL $PATH
     set -gx PATH $PATH "$HOME/.zvm/bin"
     set -gx PATH $PATH "$ZVM_INSTALL"
 end
+
+# moonbit
+fish_add_path "$HOME/.moon/bin"

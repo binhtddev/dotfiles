@@ -9,9 +9,12 @@ xtask.ts
 node_modules/
 package.json
 pnpm-lock.yaml
+bun.lock
+.helix/
 
 *.bak
 **/*.log
 .config/fish/fishd.*
 .config/helix/runtime/
 .config/nushell/history.txt
+.fonts/*
