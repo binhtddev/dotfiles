@@ -70,8 +70,8 @@ const lowp float DURATION = .5;
 
 lowp float cheapstep(lowp float edge0, lowp float edge1, lowp float x) {
     lowp float t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
-    // return t * t * (3.0 - 2.0 * t); // Original is Cubic, this is faster than nested mix
-    return t * t; // Cheaper Quadratic
+    return t * t * (3.0 - 2.0 * t); // Original is Cubic, this is faster than nested mix
+    // return t * t; // Cheaper Quadratic
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
