@@ -68,6 +68,12 @@ const vec4 TRAIL_COLOR = vec4(1.0, 0.46, 0.8, 1.0);
 const vec4 TRAIL_COLOR_ACCENT = vec4(1.0, 0., 0., 1.0);
 const lowp float DURATION = .5;
 
+lowp float cheapstep(lowp float edge0, lowp float edge1, lowp float x) {
+    lowp float t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+    // return t * t * (3.0 - 2.0 * t); // Original is Cubic, this is faster than nested mix
+    return t * t; // Cheaper Quadratic
+}
+
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     #if !defined(WEB)
@@ -107,7 +113,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     lowp float sdfCursor = getSdfRectangle(vu, currentCursor.xy - curSize * offsetFactor, curSize * 0.5);
     lowp float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-    newColor = mix(newColor, TRAIL_COLOR_ACCENT, 1.0 - smoothstep(sdfTrail, -0.01, 0.001));
+    newColor = mix(newColor, TRAIL_COLOR_ACCENT, 1.0 - cheapstep(sdfTrail, -0.01, 0.001));
 
     lowp float aaScale = iResolution.y * 0.25;
     newColor = mix(newColor, TRAIL_COLOR, 1.0 - clamp(sdfTrail * aaScale, 0.0, 1.0));
