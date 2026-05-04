@@ -63,7 +63,7 @@ keybind = alt+0=unbind
 ### Shaders
 
 # custom-shader = shaders/cursor_smear.glsl
-# custom-shader = shaders/cursor_blaze.glsl
+custom-shader = shaders/cursor_blaze.glsl
 # custom-shader = shaders/cursor_frozen.glsl
 # custom-shader = shaders/manga_slash.glsl
 
