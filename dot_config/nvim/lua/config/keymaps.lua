@@ -7,6 +7,9 @@ vim.keymap.set("n", "<leader>y", '"+yy', { desc = "[Y]ank to clipboard" })
 vim.keymap.set({ "v" }, "<leader>y", '"+y', { desc = "[Y]ank to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "[P]aste from clipboard" })
 
+vim.keymap.del({ "n", "x" }, "j")
+vim.keymap.del({ "n", "x" }, "k")
+
 vim.keymap.set({ "c", "i" }, "<c-j>", "<c-n>", { remap = true })
 vim.keymap.set({ "c", "i" }, "<c-k>", "<c-p>", { remap = true })
 

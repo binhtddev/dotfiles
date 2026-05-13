@@ -26,6 +26,9 @@ return {
   {
     "nvim-lspconfig",
     opts = {
+      inlay_hints = {
+        enabled = false, -- This disables them globally in LazyVim
+      },
       diagnostics = {
         float = {
           border = "rounded",

@@ -68,12 +68,7 @@ deno:
 
 .PHONY: monofonts
 monofonts:
-	mkdir -p "${HOME}/.local/share/fonts" && \
-	bash ./scripts/monaspace-install.sh Argon && \
-	bash ./scripts/monaspace-install.sh Krypton && \
-	bash ./scripts/monaspace-install.sh Neon && \
-	bash ./scripts/monaspace-install.sh Radon && \
-	bash ./scripts/monaspace-install.sh Xenon
+	bash ./scripts/install-all-fonts.sh
 
 .PHONY: nvim
 nvim:

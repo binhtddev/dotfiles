@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/bash
+set -euo pipefail
+bash "{{ .chezmoi.sourceDir }}/scripts/install-all-fonts.sh"
+{{ end -}}

@@ -7,6 +7,8 @@ if not string match -q -- "$HOME/.local/bin" $PATH
     set -gx PATH "$HOME/.local/bin" $PATH
 end
 
+# if type -q nvim
+#     export EDITOR=nvim
 if type -q helix
     if not type -q hx
         alias hx="helix"

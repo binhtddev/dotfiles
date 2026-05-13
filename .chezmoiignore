@@ -17,4 +17,3 @@ bun.lock
 .config/fish/fishd.*
 .config/helix/runtime/
 .config/nushell/history.txt
-.fonts/*

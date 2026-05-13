@@ -46,3 +46,8 @@ character = "┊" # Some characters that work well: "▏", "╎", "┆", "┊", 
 
 [editor.file-picker]
 hidden = false
+
+[editor.word-completion]
+enable = true
+# Set the trigger length lower so that words are completed more often
+trigger-length = 3
