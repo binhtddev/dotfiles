@@ -53,12 +53,7 @@ vim.o.spelloptions = "camel,noplainbuffer"
 
 -- require("vim.lsp.log").set_format_func(vim.inspect)
 
-vim.filetype.add({
-  pattern = {
-    [".*/tree-sitter-*/test/corpus/.*\\.txt"] = "test",
-  },
-})
-
 vim.treesitter.language.register("c_sharp", "csharp")
 
 vim.g.lazyvim_ts_lsp = "tsgo"
+vim.g.lazyvim_python_lsp = "pyrefly"

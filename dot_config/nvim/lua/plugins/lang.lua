@@ -1,13 +1,18 @@
+-- require("lazyvim.plugins.extras.lang.python")
+
 return {
   -- { import = "plugins.lang.gherkin" },
   { import = "plugins.lang.json" },
   { import = "plugins.lang.rust" },
   { import = "plugins.lang.moonbit" },
+  { import = "plugins.lang.odoo" },
   {
     "nvim-treesitter",
     opts = {
       ensure_installed = {
+        "ini",
         "css",
+        "scss",
         "editorconfig",
         "html",
         "make",

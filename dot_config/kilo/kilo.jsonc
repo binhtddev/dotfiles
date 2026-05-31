@@ -1,0 +1,79 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "disabled_providers": [],
+  "provider": {
+    "opencode_go": {
+      "name": "Opencode (Go)",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://opencode.ai/zen/go/v1"
+      },
+      "models": {
+        "deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash",
+          "reasoning": true
+        },
+        "deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro",
+          "reasoning": true
+        },
+        "glm-5": {
+          "name": "glm-5"
+        },
+        "glm-5.1": {
+          "name": "glm-5.1"
+        },
+        "hy3-preview": {
+          "name": "hy3-preview"
+        },
+        "kimi-k2.5": {
+          "name": "kimi-k2.5"
+        },
+        "kimi-k2.6": {
+          "name": "kimi-k2.6"
+        },
+        "mimo-v2-omni": {
+          "name": "mimo-v2-omni"
+        },
+        "mimo-v2-pro": {
+          "name": "mimo-v2-pro"
+        },
+        "mimo-v2.5": {
+          "name": "mimo-v2.5"
+        },
+        "mimo-v2.5-pro": {
+          "name": "mimo-v2.5-pro"
+        },
+        "minimax-m2.5": {
+          "name": "minimax-m2.5"
+        },
+        "minimax-m2.7": {
+          "name": "minimax-m2.7"
+        },
+        "qwen3.5-plus": {
+          "name": "qwen3.5-plus"
+        },
+        "qwen3.6-plus": {
+          "name": "qwen3.6-plus"
+        }
+      }
+    }
+  },
+  "permission": {
+    "bash": "allow"
+  },
+  "model": "opencode_go/deepseek-v4-flash",
+  "small_model": "opencode_go/deepseek-v4-flash",
+  "mcp": {
+    "open-websearch": {
+      "type": "local",
+      "command": ["npx", "open-websearch@latest"],
+      "environment": {
+        "DEFAULT_SEARCH_ENGINE": "duckduckgo",
+        "ENABLE_CORS": "true"
+      },
+      "enabled": true,
+      "timeout": 30000
+    }
+  }
+}

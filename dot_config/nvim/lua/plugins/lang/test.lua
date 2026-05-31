@@ -7,5 +7,11 @@ return {
     vim.g.tstest_fullwidth_rules = false
     -- set the highlight group of the rules
     vim.g.tstest_rule_hlgroup = "FoldColumn"
+
+    vim.filetype.add({
+      pattern = {
+        [".*/tree-sitter-*/test/corpus/.*\\.txt"] = "test",
+      },
+    })
   end,
 }

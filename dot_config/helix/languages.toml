@@ -60,6 +60,30 @@ language-servers = [
   ] },
 ]
 
+[[language]]
+name = "jsx"
+language-servers = [
+  { name = "tsgo", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+  "emmet-lsp",
+]
+
+[[language]]
+name = "tsx"
+language-servers = [
+  { name = "tsgo", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+  "emmet-lsp",
+]
+
 [language-server.emmet-lsp]
 command = "emmet-language-server"
 args = ["--stdio"]
