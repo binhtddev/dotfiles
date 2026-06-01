@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.78.0",
-  "defaultProvider": "opencode",
-  "defaultModel": "mimo-v2.5-free",
+  "defaultProvider": "commandcode",
+  "defaultModel": "xiaomi/mimo-v2.5",
   "defaultThinkingLevel": "minimal",
   "hideThinkingBlock": true
 }
