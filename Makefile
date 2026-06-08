@@ -20,6 +20,10 @@ uninstall-xinput:
 	rm -f /etc/X11/xorg.conf.d/00-keyboard.conf
 	rm -f /etc/X11/xorg.conf.d/30-touchpad.conf
 
+.PHONY: bg
+bg:
+	chezmoi apply ~/.wallpaper.png
+
 .PHONY: paru
 paru:
 	# Dependencies: base-devel
