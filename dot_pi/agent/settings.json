@@ -1,7 +1,8 @@
 {
-  "lastChangelogVersion": "0.78.0",
-  "defaultProvider": "commandcode",
-  "defaultModel": "xiaomi/mimo-v2.5",
-  "defaultThinkingLevel": "minimal",
-  "hideThinkingBlock": true
+  "lastChangelogVersion": "0.79.6",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": true,
+  "theme": "dark"
 }

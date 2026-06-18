@@ -18,5 +18,6 @@ bun.lock
 .config/fish/fishd.*
 .config/helix/runtime/
 .config/nushell/history.txt
+.config/systemd/
 .pi/agent/sessions/
 .pi/agent/auth.json

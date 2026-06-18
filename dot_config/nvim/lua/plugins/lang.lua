@@ -15,6 +15,7 @@ return {
         "scss",
         "editorconfig",
         "html",
+        "htmldjango",
         "make",
         "kdl",
         "mermaid",
