@@ -19,11 +19,7 @@ language-servers = [
 
 [[language]]
 name = "jsonc"
-file-types = [
-  { glob = "*.jsonc" },
-  { glob = "tsconfig.json" },
-  { glob = "tsconfig.*.json" },
-]
+file-types = [{ glob = "*.jsonc" }, { glob = "tsconfig.json" }, { glob = "tsconfig.*.json" }]
 language-servers = [
   { name = "vscode-json-language-server", except-features = [
     "format",
@@ -133,7 +129,7 @@ source = { git = "https://github.com/moonbitlang/tree-sitter-moonbit", rev = "36
 name = "moonbit"
 scope = "source.moonbit"
 injection-regex = "^(mbt|moonbit)$"
-file-types = ["mbt", "mbti", "moonbit", {glob = "moon.pkg"}]
+file-types = ["mbt", "mbti", "moonbit", { glob = "moon.pkg" }]
 shebangs = []
 roots = ["moon.mod.json", "moon.pkg"]
 auto-format = true

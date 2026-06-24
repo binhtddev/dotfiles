@@ -1,10 +1,6 @@
 [[language]]
 name = "ghostty"
-file-types = [
-  { glob = "*.ghostty" },
-  { glob = "ghostty/config" },
-  { glob = "ghostty/**/*.conf" },
-]
+file-types = [{ glob = "*.ghostty" }, { glob = "ghostty/config" }, { glob = "ghostty/**/*.conf" }]
 
 [[language]]
 name = "ini"
