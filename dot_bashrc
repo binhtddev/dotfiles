@@ -59,8 +59,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
-if [[ ":$PATH:" != *":$PNPM_HOME:"* ]]; then
-    export PATH="$PNPM_HOME:$PATH"
+if [[ ":$PATH:" != *":$PNPM_HOME/bin:"* ]]; then
+    export PATH="$PNPM_HOME/bin:$PATH"
 fi
 # pnpm end
 
@@ -76,3 +76,6 @@ if [[ ":$PATH:" != *":$ZVM_INSTALL:"* ]]; then
     export PATH="$PATH:$HOME/.zvm/bin"
     export PATH="$PATH:$ZVM_INSTALL"
 fi
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
