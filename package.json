@@ -1,19 +1,24 @@
 {
   "name": "@binhtran432k/dotfiles",
-  "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
   "description": "",
-  "scripts": {
-    "build": "node --experimental-transform-types xtask.ts --build"
-  },
   "keywords": [],
-  "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.12.4",
+  "author": "",
+  "workspaces": [
+    "./dot_pi"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "node --experimental-transform-types xtask.ts --build",
+    "prepare": "vp config"
+  },
   "devDependencies": {
     "@jsquash/oxipng": "^2.3.0",
     "@resvg/resvg-wasm": "^2.6.2",
-    "@types/bun": "latest"
-  }
+    "@types/bun": "latest",
+    "vite-plus": "catalog:"
+  },
+  "packageManager": "pnpm@11.7.0"
 }

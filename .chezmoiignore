@@ -9,6 +9,7 @@ xtask.ts
 node_modules/
 package.json
 tsconfig.json
+tsconfig.*.jsonc
 pnpm-lock.yaml
 bun.lock
 .helix/
