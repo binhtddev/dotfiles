@@ -7,6 +7,11 @@ yugi:
 	nixos-rebuild switch --flake ".#yugi" --sudo
 	nix run home-manager -- switch --flake ".#yugi"
 
+.PHONY: atem
+atem:
+	nixos-rebuild switch --flake ".#atem" --sudo
+	nix run home-manager -- switch --flake ".#atem"
+
 .PHONY: work
 work:
 	rm -rf work

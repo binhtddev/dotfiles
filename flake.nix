@@ -2,11 +2,11 @@
   description = "Nix dotfiles of Binh Tran";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager";
-      # url = "github:nix-community/home-manager/release-25.11";
+      # url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -94,6 +94,13 @@
           };
           modules = [ ./hosts/yugi/configuration.nix ];
         };
+        atem = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/atem/configuration.nix ];
+        };
       };
 
       # Home Manager configuration entrypoint
@@ -102,6 +109,13 @@
         yugi = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           modules = [ ./hosts/yugi/home.nix ];
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        atem = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [ ./hosts/atem/home.nix ];
           extraSpecialArgs = {
             inherit inputs outputs;
           };
