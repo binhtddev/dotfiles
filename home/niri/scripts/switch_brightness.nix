@@ -1,6 +1,9 @@
 { pkgs, ... }:
+let
+  cli = "${pkgs.brightnessctl}/bin/brightnessctl";
+in
 pkgs.writeShellScriptBin "switch_brightness.sh" ''
-  curr=$(${pkgs.light}/bin/light -G)
+  curr=$(${cli} g)
   result=$(awk -v n="$curr" -v a="$1" -v b="$2" '
     function abs(x) {
       return (x < 0) ? -x : x
@@ -16,6 +19,6 @@ pkgs.writeShellScriptBin "switch_brightness.sh" ''
       }
     }
   ')
-  ${pkgs.light}/bin/light -S $result
+  ${cli} set $result
   exit 0
 ''

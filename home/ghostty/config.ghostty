@@ -1,3 +1,10 @@
+# vim: ft=ghostty
+# This is the configuration file for Ghostty.
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
 # Run `ghostty +show-config --default --docs` to view a list of
 # all available config options and their default values.
 #
@@ -31,25 +38,14 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = dracutux.ghostty
+theme = dracutux.conf
 font-family = monospace
 # window-decoration = none
 
+font-feature = +ss01,+ss02,+ss03,+ss04,+ss05,+ss06,+ss07,+ss08,+ss09,+ss10,+calt,+liga
+
 # Hack Esc Key
-# Esc
 keybind = ctrl+left_bracket=text:\x1b
-# Shift + Tab
-# keybind = ctrl+k=text:\x1b[Z
-# Tab
-# keybind = ctrl+j=text:\x09
-# Ctrl + p
-# keybind = ctrl+k=text:\x10
-# Ctrl + n
-# keybind = ctrl+j=text:\x0e
-# Up
-# keybind = ctrl+k=text:\x1b[A
-# # Down
-# keybind = ctrl+j=text:\x1b[B
 
 ### Disalbe Alt+[number] for zellij
 
@@ -66,19 +62,22 @@ keybind = alt+0=unbind
 
 ### Shaders
 
+# custom-shader = shaders/cursor_smear.glsl
 custom-shader = shaders/cursor_blaze.glsl
+# custom-shader = shaders/cursor_frozen.glsl
+# custom-shader = shaders/manga_slash.glsl
 
 ### Key bindings
 
- # keybind = alt+h=goto_split:left
- # keybind = alt+j=goto_split:bottom
- # keybind = alt+k=goto_split:top
- # keybind = alt+l=goto_split:right
-
- # keybind = alt+f=toggle_split_zoom
-
- # keybind = alt+a>n=new_split:auto
- # keybind = alt+enter=toggle_quick_terminal
-
- # keybind = alt+a>shift+n=new_tab
- # keybind = alt+a>r=reload_config
+# keybind = alt+h=goto_split:left
+# keybind = alt+j=goto_split:bottom
+# keybind = alt+k=goto_split:top
+# keybind = alt+l=goto_split:right
+#
+# keybind = alt+f=toggle_split_zoom
+#
+# keybind = alt+a>n=new_split:auto
+# keybind = alt+enter=toggle_quick_terminal
+#
+# keybind = alt+a>shift+n=new_tab
+# keybind = alt+a>r=reload_config

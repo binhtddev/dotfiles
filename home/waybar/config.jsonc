@@ -46,9 +46,9 @@
   },
   "backlight": {
     "format": "{icon} {percent}%",
-    "on-click": "switch_brightness.sh 40 80",
-    "on-scroll-up": "light -A 5",
-    "on-scroll-down": "light -U 5",
+    "on-click": "switch_brightness.sh 3000 6000",
+    "on-scroll-up": "brightnessctl set 5%+",
+    "on-scroll-down": "brightnessctl -n750 set 5%-",
     "format-icons": [
       "󰛩",
       "󱩏",

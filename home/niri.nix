@@ -8,6 +8,7 @@ args@{ pkgs, ... }:
     waybar.enable = true;
   };
   home.packages = with pkgs; [
+    pcmanfm-qt
     adwaita-icon-theme # for lacking icon in gtk apps
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     libnotify # notify-send
@@ -84,12 +85,9 @@ args@{ pkgs, ... }:
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
-      events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.swaylock}/bin/swaylock -fF";
-        }
-      ];
+      events = {
+        "before-sleep" = "${pkgs.swaylock}/bin/swaylock -fF";
+      };
     };
   };
 }

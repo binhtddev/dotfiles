@@ -8,6 +8,18 @@ window#waybar {
   color: #ffffee;
 }
 
+tooltip {
+  background: transparent;
+  border: none;
+}
+
+tooltip box {
+  background: #111122;
+  border: 1px solid #ff77cc;
+  border-radius: 0;
+  padding: 8px;
+}
+
 #clock,
 #pulseaudio,
 #memory,

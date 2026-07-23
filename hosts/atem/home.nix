@@ -4,6 +4,7 @@
   ...
 }:
 let
+  hostname = "atem";
   username = "binhtd";
   homeDirectory = "/home/${username}";
 in
@@ -41,7 +42,7 @@ in
     ../../home/dev/go.nix
     ../../home/dev/moonbit.nix
     ../../home/dev/python.nix
-    # ../../home/dev/rust.nix
+    ../../home/dev/rust.nix
     ../../home/dev/tree-sitter.nix
     ../../home/dev/zig.nix
   ];
@@ -68,12 +69,16 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-1.1.12"
+  ];
+
   home = {
     inherit username homeDirectory;
     shellAliases = {
-      mknixos = "nixos-rebuild switch --flake ${homeDirectory}/dotfiles#yugi --sudo";
-      mkhome = "home-manager switch --flake ${homeDirectory}/dotfiles#yugi";
-      mknews = "home-manager news --flake ${homeDirectory}/dotfiles#yugi";
+      mknixos = "nixos-rebuild switch --flake ${homeDirectory}/dotfiles#${hostname} --sudo";
+      mkhome = "home-manager switch --flake ${homeDirectory}/dotfiles#${hostname}";
+      mknews = "home-manager news --flake ${homeDirectory}/dotfiles#${hostname}";
     };
     sessionVariables = {
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = 1;
@@ -91,11 +96,14 @@ in
       ### Learning
       exercism
       ### Office
-      libreoffice
+      # libreoffice
+      onlyoffice-desktopeditors
       ### Media
       mpv
-      # vimiv-qt
+      vimiv-qt
       ### Utils
+      btop
+      usbutils
       inkscape
       gimp
       edir
@@ -104,6 +112,7 @@ in
       lefthook
       vim
       nerd-font-patcher
+      ventoy
       # python313Packages.opentype-feature-freezer
       dragon-drop
       ### Dev Yaml
@@ -121,12 +130,12 @@ in
       marksman
       ### Dev Node
       # bun
-      pnpm
+      # pnpm
       nodejs
       ### Dev Html/Css/Json/JS
       vscode-langservers-extracted
-      typescript
-      typescript-language-server
+      # typescript
+      # typescript-language-server
       emmet-language-server
       ### Web Formatter
       # biome
@@ -142,6 +151,7 @@ in
     # release notes.
     stateVersion = "24.05"; # Please read the comment before changing.
   };
+  # usage: lib.file.mkDotfilesSymlink "home/nvim"
   lib.file.mkDotfilesSymlink = link: {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${link}";
     force = true;

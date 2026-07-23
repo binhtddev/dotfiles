@@ -172,8 +172,44 @@ rules = [
   { mime = "application/{pdf,doc,rtf}", fg = "#55ff77" },
 
   # Fallback
-  { name = "*", fg = "#ffffee" },
-  { name = "*/", fg = "#bb99ff" },
+  { url = "*", fg = "#ffffee" },
+  { url = "*/", fg = "#bb99ff" },
 ]
 
 # : }}}
+
+[icon]
+
+dirs = [
+	{ name = ".config", text = "", fg = "#ff77cc" },
+	{ name = ".git", text = "", fg = "#88eeff" },
+	{ name = ".github", text = "", fg = "#bb99ff" },
+	{ name = ".npm", text = "", fg = "#bb99ff" },
+	{ name = "Desktop", text = "", fg = "#88eeff" },
+	{ name = "Development", text = "", fg = "#88eeff" },
+	{ name = "Documents", text = "", fg = "#88eeff" },
+	{ name = "Downloads", text = "", fg = "#88eeff" },
+	{ name = "Library", text = "", fg = "#88eeff" },
+	{ name = "Movies", text = "", fg = "#88eeff" },
+	{ name = "Music", text = "", fg = "#88eeff" },
+	{ name = "Pictures", text = "", fg = "#88eeff" },
+	{ name = "Public", text = "", fg = "#88eeff" },
+	{ name = "Videos", text = "", fg = "#88eeff" },
+]
+conds = [
+	# Special files
+	{ if = "orphan", text = "", fg = "#ffffee" },
+	{ if = "link", text = "", fg = "#66bbff" },
+	{ if = "block", text = "", fg = "#ffbb77" },
+	{ if = "char", text = "", fg = "#ffbb77" },
+	{ if = "fifo", text = "", fg = "#ffbb77" },
+	{ if = "sock", text = "", fg = "#ffbb77" },
+	{ if = "sticky", text = "", fg = "#ffbb77" },
+	{ if = "dummy", text = "", fg = "#ff5555" },
+
+	# Fallback
+	{ if = "dir & hovered", text = "", fg = "#bb99ff" },
+	{ if = "dir", text = "", fg = "#bb99ff" },
+	{ if = "exec", text = "", fg = "#55ff77" },
+	{ if = "!dir", text = "", fg = "#ffffee" },
+]

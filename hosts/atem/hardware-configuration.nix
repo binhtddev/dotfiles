@@ -14,52 +14,57 @@
   boot = {
     initrd.availableKernelModules = [
       "xhci_pci"
-      "ehci_pci"
       "ahci"
-      "usbhid"
       "usb_storage"
       "sd_mod"
-      "sdhci_pci"
+      "rtsx_pci_sdmmc"
     ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+
+    # Force the kernel to bypass the ACPI conflict and use basic pooling
+    kernelParams = [ "initcall_blacklist=intel_lpss_init" ];
+    # Completely blacklist the buggy Intel Low Power modules
+    blacklistedKernelModules = [
+      "intel_lpss"
+      "intel_lpss_pci"
+    ];
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/833298aa-8005-446f-b134-eea7946afd8f";
+    device = "/dev/disk/by-uuid/78a91100-faa6-4900-96bb-d21a4c7ad028";
     fsType = "btrfs";
-    options = [
-      "subvol=@"
-      "compress=zstd"
-    ];
+    options = [ "subvol=@,compress=zstd,noatime" ];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/833298aa-8005-446f-b134-eea7946afd8f";
+    device = "/dev/disk/by-uuid/78a91100-faa6-4900-96bb-d21a4c7ad028";
     fsType = "btrfs";
-    options = [
-      "subvol=@home"
-      "compress=zstd"
-    ];
+    options = [ "subvol=@home,compress=zstd,noatime" ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/78a91100-faa6-4900-96bb-d21a4c7ad028";
+    fsType = "btrfs";
+    options = [ "subvol=@nix,compress=zstd,noatime" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/d7ac1fb5-6583-4067-b05e-6cee505b511c";
-    fsType = "ext4";
-  };
-
-  # Bootloader partitions
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/60BC-8D78";
+    device = "/dev/disk/by-uuid/6FD5-CFF8";
     fsType = "vfat";
     options = [
-      "fmask=0022"
-      "dmask=0022"
+      "fmask=0077"
+      "dmask=0077"
     ];
   };
 
-  # Swap Memory (Zram configured via NixOS module)
+  fileSystems."/mnt/Data" = {
+    device = "/dev/disk/by-uuid/8e2f74f9-9dce-4de2-998c-4cc4d7224b58";
+    fsType = "ext4";
+  };
+
+  swapDevices = [ ];
   zramSwap.enable = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

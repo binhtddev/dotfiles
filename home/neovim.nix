@@ -1,7 +1,14 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 {
   programs.neovim = {
     enable = true;
+    sideloadInitLua = true;
+    withRuby = false;
+    withPython3 = false;
     extraPackages = with pkgs; [
       ### plugins installer
       gnumake
@@ -19,4 +26,6 @@
       # typescript
     ];
   };
+
+  home.file."${config.xdg.configHome}/nvim" = config.lib.file.mkDotfilesSymlink "home/nvim";
 }

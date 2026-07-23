@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-  light = "${pkgs.light}/bin/light";
+  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   notifySend = "${pkgs.libnotify}/bin/notify-send";
 in
 pkgs.writeShellScriptBin "mycontrol.sh" ''
@@ -98,19 +98,19 @@ pkgs.writeShellScriptBin "mycontrol.sh" ''
 
   define_light_functions() {
     light_get_brightness() {
-      printf "%.0f" $(${light})
+      printf "%.0f" $(( $(${brightnessctl} g) * 100 / $(${brightnessctl} m) ))
     }
 
     light_increase_brightness() {
-      ${light} -A "$1"
+      ${brightnessctl} s "$1%+"
     }
 
     light_decrease_brightness() {
-      ${light} -U "$1"
+      ${brightnessctl} -n750 s "$1%-"
     }
 
     light_set_brightness() {
-      ${light} -S "$1"
+      ${brightnessctl} s "$1%"
     }
   }
 

@@ -8,6 +8,7 @@
     ./hardware-extra.nix
 
     ../share.nix
+    ../../nixos/bluetooth.nix
     ../../nixos/core_pkgs.nix
     ../../nixos/envfs.nix
     ../../nixos/fish.nix
@@ -19,9 +20,11 @@
     ../../nixos/podman.nix
     ../../nixos/sound.nix
     ../../nixos/touchpad.nix
+    ../../nixos/virt.nix
 
-    ../../nixos/niri.nix
     # ../../nixos/cosmic.nix
+    # ../../nixos/lxqt.nix
+    ../../nixos/niri.nix
     # ../../nixos/plasma.nix
   ];
 
@@ -61,9 +64,38 @@
         "wheel" # Enable ‘sudo’ for the user.
         "networkmanager"
         "video"
+        "libvirtd" # manage VMs without sudo
       ];
     };
   };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.ipp-usb.enable = true;
+
+  services.printing = {
+    enable = true;
+    # Force CUPS to listen on all IPv4 and IPv6 network interfaces
+    listenAddresses = [ "*:631" ];
+    # Grant network devices permission to communicate with the CUPS system
+    allowFrom = [ "all" ];
+    drivers = with pkgs; [
+      gutenprint
+      cups-filters
+      cups-browsed
+      canon-capt
+    ];
+  };
+
+  networking.firewall.allowedTCPPorts = [ 631 ];
+
+  environment.systemPackages = with pkgs; [
+    ghostscript
+  ];
 
   users.defaultUserShell = pkgs.fish;
 

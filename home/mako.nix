@@ -10,7 +10,7 @@
       height = 110;
       border-size = 2;
       border-color = "#bb99ff";
-      border-radius = 4;
+      border-radius = 0;
       icons = true;
       max-icon-size = 64;
       default-timeout = 5000;

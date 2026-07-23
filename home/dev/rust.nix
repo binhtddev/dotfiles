@@ -20,6 +20,7 @@
     ];
     sessionVariables = {
       RUSTUP_AUTO_INSTALL = 0;
+      RUSTUP_TOOLCHAIN = "stable";
     };
     sessionPath = [
       "$HOME/.cargo/bin"

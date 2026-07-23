@@ -1,7 +1,3 @@
-[language-server.emmet-lsp]
-command = "emmet-language-server"
-args = ["--stdio"]
-
 [[language]]
 name = "toml"
 roots = ["."]
@@ -11,8 +7,27 @@ name = "ghostty"
 file-types = [{ glob = "*.ghostty" }]
 
 [[language]]
+name = "json"
+language-servers = [
+  { name = "vscode-json-language-server", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+]
+
+[[language]]
 name = "jsonc"
 file-types = [{ glob = "*.jsonc" }, { glob = "tsconfig.json" }, { glob = "tsconfig.*.json" }]
+language-servers = [
+  { name = "vscode-json-language-server", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+]
 
 [[language]]
 name = "html"
@@ -20,12 +35,84 @@ language-servers = ["vscode-html-language-server", "emmet-lsp"]
 
 [[language]]
 name = "javascript"
-language-servers = ["typescript-language-server", "emmet-lsp"]
+language-servers = [
+  { name = "tsgo", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+  "emmet-lsp",
+]
+
+[[language]]
+name = "typescript"
+language-servers = [
+  { name = "tsgo", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+]
+
+[[language]]
+name = "jsx"
+language-servers = [
+  { name = "tsgo", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+  "emmet-lsp",
+]
+
+[[language]]
+name = "tsx"
+language-servers = [
+  { name = "tsgo", except-features = [
+    "format",
+  ] },
+  { name = "oxfmt", only-features = [
+    "format",
+  ] },
+  "emmet-lsp",
+]
+
+[language-server.emmet-lsp]
+command = "emmet-language-server"
+args = ["--stdio"]
 
 [[language-server.vscode-json-language-server.config.json.schemas]]
-fileMatch = ["tsconfig.json", "tsconfig.*.json"]
+fileMatch = ["tsconfig.json", "tsconfig.*.jsonc"]
 url = "https://json.schemastore.org/tsconfig.json"
 
 [[language-server.vscode-json-language-server.config.json.schemas]]
-fileMatch = [ "package.json" ]
+fileMatch = ["package.json"]
 url = "https://json.schemastore.org/package.json"
+
+[language-server.tsgo]
+command = 'tsc'
+args = ['--lsp', '--stdio']
+
+[language-server.oxlint]
+command = 'oxlint'
+args = ['--lsp']
+
+[language-server.oxfmt]
+command = 'oxfmt'
+args = ['--lsp']
+
+[language-server.tsgo.config.typescript]
+updateImportsOnFileMove.enabled = "always"
+suggest.completeFunctionCalls = true
+tsserver.enableTracing = true
+inlayHints.parameterNames.enabled = "all"
+inlayHints.parameterTypes.enabled = true
+inlayHints.variableTypes.enabled = true
+inlayHints.propertyDeclarationTypes.enabled = true
+inlayHints.functionLikeReturnTypes = true
+inlayHints.enumMemberValues.enabled = true
+format.enable = false
+tsserver.experimental.enableProjectDiagnostics = true

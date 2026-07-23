@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-  light = "${pkgs.light}/bin/light";
+  light = "${pkgs.brightnessctl}/bin/light";
   notifySend = "${pkgs.libnotify}/bin/notify-send";
 in
 pkgs.writeShellScriptBin "mycontrol" ''

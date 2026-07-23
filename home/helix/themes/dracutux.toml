@@ -85,10 +85,7 @@ type = "cyan"
 "ui.help" = { fg = "subtle_text", bg = "ui_base" }
 
 "ui.bufferline" = { fg = "subtle_text", bg = "ui_base" }
-"ui.bufferline.active" = { fg = "text", bg = "base", modifiers = [
-  "bold",
-  "italic",
-] }
+"ui.bufferline.active" = { fg = "text", bg = "base", modifiers = ["bold", "italic"] }
 "ui.bufferline.background" = { bg = "ui_base" }
 
 "ui.text" = "text"
