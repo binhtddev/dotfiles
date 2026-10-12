@@ -3,12 +3,12 @@
   systemd.user = {
     services = {
       eye-strain-notify = {
-        # Install.WantedBy = [ "default.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
         Service.ExecStart = "${pkgs.libnotify}/bin/notify-send 'Break' 'Eye strain break 20 secs!' -u critical";
         Unit.Description = "Send notification to take 20sec break for preventing eye strain.";
       };
       stretch-notify = {
-        # Install.WantedBy = [ "default.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
         Service.ExecStart = "${pkgs.libnotify}/bin/notify-send 'Break' 'Stretch!' -u critical";
         Unit.Description = "Send notification to take a break and stretch.";
       };

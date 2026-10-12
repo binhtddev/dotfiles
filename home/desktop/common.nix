@@ -1,3 +1,4 @@
+# Desktop bits shared by every host: dark GTK theming for app-level consistency.
 { config, pkgs, ... }:
 {
   dconf.settings = {
@@ -5,18 +6,7 @@
       color-scheme = "prefer-dark";
     };
   };
-  home = {
-    sessionVariables = {
-      GTK_THEME = "adw-gtk3-dark";
-    };
-    pointerCursor = {
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-dark";
-      size = 24;
-      gtk.enable = true;
-      x11.enable = true;
-    };
-  };
+
   gtk = {
     enable = true;
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
@@ -36,12 +26,9 @@
       package = pkgs.adw-gtk3;
     };
   };
-  qt = {
-    enable = true;
-    style.name = "kvantum";
-  };
+
   xdg.configFile = {
-    "gtk-3.0/gtk.css".source = ./desktop/gtk.css;
-    "gtk-4.0/gtk.css".source = ./desktop/gtk.css;
+    "gtk-3.0/gtk.css".source = ./gtk.css;
+    "gtk-4.0/gtk.css".source = ./gtk.css;
   };
 }

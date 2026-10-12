@@ -4,4 +4,5 @@ pkgs: {
   # example = pkgs.callPackage ./example { };
   win32yank = pkgs.callPackage ./win32yank.nix { };
   bifont = pkgs.callPackage ./bifont.nix { };
+  arc-kde = pkgs.callPackage ./arc-kde.nix { };
 }

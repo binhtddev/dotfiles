@@ -9,6 +9,7 @@
     ../../hardwares/dell-latitude-e6440.nix
 
     ../share.nix
+    ../../nixos/bluetooth.nix
     ../../nixos/core_pkgs.nix
     ../../nixos/envfs.nix
     ../../nixos/fish.nix

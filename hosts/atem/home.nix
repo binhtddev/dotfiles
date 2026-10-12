@@ -29,15 +29,10 @@ in
     ../../home/yazi.nix
     ../../home/zellij.nix
 
-    ../../home/desktop.nix
-    ../../home/fuzzel.nix
+    ../../home/desktop/common.nix
     # ../../home/i3status.nix
-    ../../home/mako.nix
-    ../../home/niri.nix
-    ../../home/swaylock.nix
+    ../../home/plasma.nix
     ../../home/systemd/eye-strain.nix
-    ../../home/waybar.nix
-    ../../home/wpaperd.nix
 
     ../../home/dev/go.nix
     ../../home/dev/moonbit.nix

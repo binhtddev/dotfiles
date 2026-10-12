@@ -28,7 +28,8 @@ in
     ../../home/yazi.nix
     ../../home/zellij.nix
 
-    ../../home/desktop.nix
+    ../../home/desktop/common.nix
+    ../../home/desktop/niri.nix
     ../../home/fuzzel.nix
     # ../../home/i3status.nix
     ../../home/mako.nix

@@ -37,8 +37,6 @@ args@{ pkgs, ... }:
     };
   };
   systemd.user.services = {
-    eye-strain-notify.Install.WantedBy = [ "niri.service" ];
-    stretch-notify.Install.WantedBy = [ "niri.service" ];
     wpaperd.Install.WantedBy = [ "niri.service" ];
     kanshi.Install.WantedBy = [ "niri.service" ];
     swayidle.Install.WantedBy = [ "niri.service" ];

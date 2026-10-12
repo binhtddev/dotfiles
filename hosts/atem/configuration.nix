@@ -13,6 +13,7 @@
     ../../nixos/envfs.nix
     ../../nixos/fish.nix
     ../../nixos/fonts.nix
+    ../../nixos/input-method.nix
     ../../nixos/light.nix
     ../../nixos/network.nix
     ../../nixos/nix.nix
@@ -24,8 +25,8 @@
 
     # ../../nixos/cosmic.nix
     # ../../nixos/lxqt.nix
-    ../../nixos/niri.nix
-    # ../../nixos/plasma.nix
+    # ../../nixos/niri.nix
+    ../../nixos/plasma.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
