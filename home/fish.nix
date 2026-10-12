@@ -1,8 +1,11 @@
+let
+  keybinding = "vi"; # vi/helix
+in
 {
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-      fish_helix_key_bindings
+      fish_${keybinding}_key_bindings
     '';
     functions = {
       fish_default_mode_prompt = {

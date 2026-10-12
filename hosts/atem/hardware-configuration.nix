@@ -24,45 +24,60 @@
     extraModulePackages = [ ];
 
     # Force the kernel to bypass the ACPI conflict and use basic pooling
-    kernelParams = [ "initcall_blacklist=intel_lpss_init" ];
+    # kernelParams = [ "initcall_blacklist=intel_lpss_init" ];
     # Completely blacklist the buggy Intel Low Power modules
-    blacklistedKernelModules = [
-      "intel_lpss"
-      "intel_lpss_pci"
-    ];
+    # blacklistedKernelModules = [
+    #   "intel_lpss"
+    #   "intel_lpss_pci"
+    # ];
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/78a91100-faa6-4900-96bb-d21a4c7ad028";
-    fsType = "btrfs";
-    options = [ "subvol=@,compress=zstd,noatime" ];
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/25a38b00-91c0-46a8-9219-d2f34b94e16e";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" "subvol=@" ];
+    };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/78a91100-faa6-4900-96bb-d21a4c7ad028";
-    fsType = "btrfs";
-    options = [ "subvol=@home,compress=zstd,noatime" ];
-  };
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/25a38b00-91c0-46a8-9219-d2f34b94e16e";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" "subvol=@home" ];
+    };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/78a91100-faa6-4900-96bb-d21a4c7ad028";
-    fsType = "btrfs";
-    options = [ "subvol=@nix,compress=zstd,noatime" ];
-  };
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/25a38b00-91c0-46a8-9219-d2f34b94e16e";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" "subvol=@nix" ];
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6FD5-CFF8";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-  };
+  fileSystems."/var/log" =
+    { device = "/dev/disk/by-uuid/25a38b00-91c0-46a8-9219-d2f34b94e16e";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" "subvol=@log" ];
+    };
 
-  fileSystems."/mnt/Data" = {
-    device = "/dev/disk/by-uuid/8e2f74f9-9dce-4de2-998c-4cc4d7224b58";
-    fsType = "ext4";
-  };
+  fileSystems."/.snapshots" =
+    { device = "/dev/disk/by-uuid/25a38b00-91c0-46a8-9219-d2f34b94e16e";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" "subvol=@snapshots" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/D410-FC62";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  fileSystems."/mnt/data" =
+    { device = "/dev/disk/by-uuid/D8EA6F43EA6F1CCE";
+      fsType = "ntfs3";
+      options = [ "uid=1000" "gid=100" "umask=0022" ];
+    };
+
+  # fileSystems."/mnt/Data" = {
+  #   device = "/dev/disk/by-uuid/8e2f74f9-9dce-4de2-998c-4cc4d7224b58";
+  #   fsType = "ext4";
+  # };
 
   swapDevices = [ ];
   zramSwap.enable = true;

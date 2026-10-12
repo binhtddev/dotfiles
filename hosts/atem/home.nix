@@ -86,11 +86,12 @@ in
     };
     sessionPath = [
       "$HOME/.local/bin"
+      "$HOME/.local/share/pnpm/bin"
     ];
     packages = with pkgs; [
       ### Browser
-      # brave
-      google-chrome
+      brave
+      # google-chrome
       ### Mail
       thunderbird
       ### Learning
@@ -130,7 +131,7 @@ in
       marksman
       ### Dev Node
       # bun
-      # pnpm
+      pnpm_12
       nodejs
       ### Dev Html/Css/Json/JS
       vscode-langservers-extracted
