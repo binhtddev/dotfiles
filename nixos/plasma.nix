@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   boot = {
     plymouth.enable = true;
@@ -43,4 +43,18 @@
       wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     ];
   };
+
+  # NixOS's nixos-rebuild-sycoca unit wipes ~/.cache/ksycoca* at every session
+  # start, but it is only needed when the system generation changed. The
+  # unconditional wipe forces KDE to rebuild the service cache at login, which
+  # shows up as a panel/task manager that appears late. Make it conditional.
+  systemd.user.services.nixos-rebuild-sycoca.script = lib.mkForce ''
+    cache="''${XDG_CACHE_HOME:-$HOME/.cache}"
+    stamp="$cache/nixos-sycoca.stamp"
+    current="$(readlink -f /run/current-system)"
+    if [ "$(cat "$stamp" 2>/dev/null)" != "$current" ]; then
+      rm -fv "$cache"/ksycoca*
+      echo "$current" > "$stamp"
+    fi
+  '';
 }
