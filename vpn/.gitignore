@@ -1,0 +1,8 @@
+# VPN material that must never be committed
+certs/
+secrets/
+*.p12
+*.pfx
+client.pem
+client.key
+tma.conf

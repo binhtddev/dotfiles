@@ -159,6 +159,8 @@ in
     pkgs.papirus-icon-theme
     pkgs.kdePackages.qtstyleplugin-kvantum # engine for the Kvantum theme
     pkgs.libnotify # notify-send for the eye-strain/stretch timers
+    pkgs.freerdp # xfreerdp: RDP with auto-reconnect (krdc has no retry)
+    pkgs.kdePackages.kdialog # password prompt for vpn/rdp.sh
   ];
 
   gtk = {

@@ -1,0 +1,13 @@
+{
+  "KPackageStructure": "Plasma/Applet",
+  "KPlugin": {
+    "Id": "org.binhtd.tma",
+    "Name": "TMA VPN / RDP",
+    "Description": "Status of the TMA VPN and the office desktop, with actions on right-click",
+    "Icon": "network-vpn",
+    "Category": "System Information",
+    "License": "MIT",
+    "Version": "1.0"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0"
+}

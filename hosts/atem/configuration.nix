@@ -22,6 +22,7 @@
     ../../nixos/sound.nix
     ../../nixos/touchpad.nix
     ../../nixos/virt.nix
+    ../../vpn/nixos.nix
 
     # ../../nixos/cosmic.nix
     # ../../nixos/lxqt.nix
