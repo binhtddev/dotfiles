@@ -1,0 +1,13 @@
+{
+  "name": "dotfiles-assets",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node --experimental-transform-types xtask.ts --build"
+  },
+  "devDependencies": {
+    "@jsquash/oxipng": "^2.3.0",
+    "@resvg/resvg-wasm": "^2.6.2",
+    "@types/bun": "latest"
+  }
+}
