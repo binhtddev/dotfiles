@@ -1,31 +1,62 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 let
-  # Plasma theme, colour scheme, aurorae decoration and Kvantum themes.
-  arcKde = pkgs.callPackage ../pkgs/arc-kde.nix { };
+  # Dracutux is dark by default; switch to `.day` for the light variant.
+  dracutuxVariants = (import ../pkgs/dracutux { }).variants;
+  dracutux = dracutuxVariants.dark;
+
+  dracutuxThemes = pkgs.callPackage ../pkgs/dracutux/arc-kde.nix { };
+  dracutuxGtk = pkgs.callPackage ../pkgs/dracutux/arc-gtk.nix { };
+  dracutuxIcons = pkgs.callPackage ../pkgs/dracutux/icons.nix { };
+
+  # SVG wallpaper: the viewBox lets Qt render it at the screen size. The
+  # content-addressed store path keeps the generated script byte-identical
+  # across commits, so it is not re-applied (and does not visibly switch)
+  # at every login.
+  wallpaper = builtins.path {
+    path = ../assets/background.svg;
+    name = "background.svg";
+  };
 in
 {
   programs.plasma = {
     enable = true;
 
     workspace = {
-      # Arc Dark colours, Plasma style and Papirus icons. The window
-      # decoration is Breeze (set below): the Arc aurorae titlebar is uglier
-      # than KDE's default.
-      theme = "Arc-Dark";
-      colorScheme = "ArcDark"; # renamed from "Arc Dark" in pkgs/arc-kde.nix
-      iconTheme = "Papirus-Dark";
-      wallpaper = ../assets/swaybg.png;
+      inherit (dracutux)
+        lookAndFeel
+        colorScheme
+        iconTheme
+        ;
+
+      theme = dracutux.plasmaStyle;
+
+      # "inspired from Breeze": Breeze cursors, Dracutux everything else.
+      cursor = {
+        theme = "breeze_cursors";
+        size = 24;
+      };
+
+      inherit wallpaper;
     };
 
     configFile = {
-      # Qt/KDE application style. Used to come from the Arc global theme.
+      # Qt/KDE application style. The Kvantum theme itself is set below.
       "kdeglobals"."KDE".widgetStyle = "kvantum";
 
-      # KDE default window decoration.
+      # Dracutux window decoration: Arc titlebar, Breeze-style buttons.
+      # Aurorae v2 ignores the theme rc's LeftButtons/RightButtons, so the
+      # button layout has to come from kwinrc (KWin's own default made the
+      # close button disappear).
       "kwinrc"."org.kde.kdecoration2" = {
-        library = "org.kde.breeze";
-        theme = "Breeze";
+        library = "org.kde.kwin.aurorae";
+        theme = "__aurorae__svg__${dracutux.aurorae}";
         BorderSize = "Normal";
+        ButtonsOnLeft = "";
+        ButtonsOnRight = "IAX";
       };
 
       # On Plasma Wayland fcitx5 must be started by KWin so that it can use
@@ -41,7 +72,7 @@ in
 
       # Kvantum theme; "theme" is lowercase because that is the key Kvantum
       # reads (QSettings keys are case-sensitive).
-      "Kvantum/kvantum.kvconfig"."General".theme = "ArcDark";
+      "Kvantum/kvantum.kvconfig"."General".theme = dracutux.kvantum;
 
       # KWin starts fcitx5, so mask the XDG autostart entry that would start a
       # second instance without the compositor socket.
@@ -52,8 +83,15 @@ in
       };
 
       # KDE's gtkconfig kded module rewrites ~/.config/gtk-2.0/gtkrc at login,
-      # which collides with home-manager's declarative GTK config.
-      "kded6rc"."Module-gtkconfig".autoload = false;
+      # which collides with home-manager's declarative GTK config. The other
+      # three modules ship empty/broken in this packaging and only log
+      # "The kded module name ... is invalid!" at startup.
+      "kded6rc" = {
+        "Module-gtkconfig".autoload = false;
+        "Module-oom-notifier".autoload = false;
+        "Module-plasma-session-shortcuts".autoload = false;
+        "Module-wpad-detector".autoload = false;
+      };
     };
 
     kwin = {
@@ -98,32 +136,65 @@ in
           idleTimeoutWhenLocked = "immediately";
         };
       };
-      lowBattery.whenLaptopLidClosed = "hibernate";
+      # KDE's LowBattery profile defaults AutoSuspendIdleTimeoutSec to 30 while
+      # the display-off timer stays at 600, so the machine would sleep with the
+      # screen still on. Keep it aligned with the AC/Battery profiles instead.
+      lowBattery = {
+        autoSuspend = {
+          action = "sleep";
+          idleTimeout = 1200;
+        };
+        whenLaptopLidClosed = "hibernate";
+      };
     };
   };
 
   home.packages = [
-    arcKde
-    pkgs.kdePackages.breeze-gtk # Breeze theme for GTK apps
-    pkgs.kdePackages.qtstyleplugin-kvantum # engine for the Arc Kvantum theme
+    dracutuxThemes
+    dracutuxGtk
+    dracutuxIcons
+    # Dracutux only ships recoloured folder icons and inherits the rest of the
+    # Papirus artwork (window-* marks included) from Papirus-Dark/Papirus, so
+    # the parent themes have to be installed alongside the overlay.
+    pkgs.papirus-icon-theme
+    pkgs.kdePackages.qtstyleplugin-kvantum # engine for the Kvantum theme
     pkgs.libnotify # notify-send for the eye-strain/stretch timers
   ];
 
-  # KDE's gtkconfig kded module can recreate ~/.config/gtk-2.0/gtkrc as a real
-  # file, so allow home-manager to overwrite it instead of aborting.
-  gtk.gtk2.force = true;
+  gtk = {
+    # KDE's gtkconfig kded module can recreate ~/.config/gtk-2.0/gtkrc as a real
+    # file, so allow home-manager to overwrite it instead of aborting.
+    gtk2.force = true;
 
-  # GTK apps, including the headerbar GTK4 draws itself, match the Breeze
-  # window decoration. The shared desktop/common.nix stays on adw-gtk3-dark
-  # for the niri host.
-  gtk.theme = lib.mkForce {
-    name = "Breeze-Dark";
-    package = pkgs.kdePackages.breeze-gtk;
+    # GTK apps, including the headerbar GTK4 draws itself, match the Dracutux
+    # window decoration. The shared desktop/common.nix stays on adw-gtk3-dark
+    # for the niri host.
+    theme = lib.mkForce {
+      name = dracutux.gtkTheme;
+      package = dracutuxGtk;
+    };
+
+    # Dracutux is a thin overlay: only the coloured folder icons are ours, the
+    # rest of the set is inherited from Papirus-Dark / Papirus. Plasma, GTK and
+    # libadwaita all use it, so folders look the same everywhere.
+    iconTheme = lib.mkForce {
+      name = dracutux.gtkIconTheme;
+      package = dracutuxIcons;
+    };
+
+    gtk3.extraConfig = {
+      "gtk-application-prefer-dark-theme" = lib.mkForce (if dracutux.preferDark then 1 else 0);
+      # GTK3 has no text-input-v3 support, so point it at the fcitx GTK3 module
+      # directly (wayfrontend means GTK_IM_MODULE is not exported).
+      "gtk-im-module" = "fcitx";
+    };
+
+    gtk4.extraConfig."gtk-application-prefer-dark-theme" = lib.mkForce dracutux.preferDark;
   };
 
-  # GTK3 has no text-input-v3 support, so point it at the fcitx GTK3 module
-  # directly (waylandFrontend means GTK_IM_MODULE is not exported).
-  gtk.gtk3.extraConfig."gtk-im-module" = "fcitx";
+  dconf.settings."org/gnome/desktop/interface".color-scheme = lib.mkForce (
+    if dracutux.preferDark then "prefer-dark" else "default"
+  );
 
   # Plugin paths for the Kvantum style.
   qt.enable = true;
@@ -131,6 +202,6 @@ in
   xdg.configFile = {
     # Kvantum does not search XDG_DATA_DIRS for themes, only ~/.config/Kvantum,
     # ~/.themes and ~/.local/share/themes.
-    "Kvantum/ArcDark".source = "${arcKde}/share/Kvantum/ArcDark";
+    "Kvantum/${dracutux.kvantum}".source = "${dracutuxThemes}/share/Kvantum/${dracutux.kvantum}";
   };
 }
