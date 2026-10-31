@@ -19,13 +19,22 @@ CMD="${1:-status}"
 
 is_up() { swanctl --list-sas 2>/dev/null | grep -qE 'ESTABLISHED|INSTALLED'; }
 
+# charon is not started at boot any more; bring it up the first time the VPN is
+# actually used. `systemctl start` returns once ExecStartPost (swanctl
+# --load-all) has run, so the vici socket and the profile are ready after it.
+ensure_daemon() { systemctl start strongswan-swanctl.service; }
+
 case "$CMD" in
-  up) exec "$HERE/connect.sh" ;;
+  up)
+    ensure_daemon
+    exec "$HERE/connect.sh"
+    ;;
   down) exec "$HERE/disconnect.sh" ;;
   toggle)
     if is_up; then
       exec "$HERE/disconnect.sh"
     else
+      ensure_daemon
       exec "$HERE/connect.sh"
     fi
     ;;

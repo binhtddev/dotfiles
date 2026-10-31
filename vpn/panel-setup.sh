@@ -2,8 +2,8 @@
 #
 # Panel setup for the TMA badge.
 #
-#   panel-setup.sh            add the badge (if absent), place it before the
-#                             system tray, fix the task manager click behaviour
+#   panel-setup.sh            add the badge (if absent) and place it before the
+#                             system tray
 #   panel-setup.sh show       same as above
 #   panel-setup.sh hide       remove the badge from the panel
 #
@@ -77,15 +77,3 @@ if [ -n "$panel_id" ] && [ -n "$tma_id" ] && [ -n "$tray_id" ]; then
     systemctl --user restart plasma-plasmashell
   fi
 fi
-
-# 3. Clicking a grouped task opens the list of its windows instead of cycling.
-#    groupedTaskVisualization: 0 = cycle, 1 = window previews (tooltips),
-#    2 = Present Windows, 3 = textual list.
-js 'var p=panels()[0];
-var t=p.widgets().filter(function(w){return w.type==="org.kde.plasma.icontasks"})[0];
-if (!t) { print("no task manager"); } else {
-  t.currentConfigGroup = ["General"];
-  if (t.readConfig("groupedTaskVisualization", 0) != 1)
-    t.writeConfig("groupedTaskVisualization", 1);
-  print("tasks: " + t.readConfig("groupedTaskVisualization", 0));
-}'

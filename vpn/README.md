@@ -64,6 +64,12 @@ then `sudo nixos-rebuild switch --flake .#atem`. This provides `swanctl`, the
 `strongswan-swanctl` unit, and creates `/etc/swanctl/{x509,x509ca,private}` plus
 an empty `tma.conf` (so `swanctl --load-all` succeeds before the first setup).
 
+The unit is **not started at boot** (`wantedBy = mkForce [ ]` in `nixos.nix`):
+`vpn.sh up` starts `strongswan-swanctl` the first time it is needed, which also
+loads `/etc/swanctl/tma.conf` via the unit's `ExecStartPost`. Nothing about the
+VPN runs until you ask for it — and boot no longer waits ~6 s on
+`NetworkManager-wait-online`, since this unit was its only consumer.
+
 **2. CA certificates** (public material, from TMA's "Certificate" zip):
 
 ```sh
@@ -191,10 +197,20 @@ rule so `wheel` can run `vpn.sh` without a password prompt. `Update RDP
 password` runs `rdp.sh --set-password`, which prompts and overwrites the
 KWallet entry.
 
-The script also sets the task manager's
-`groupedTaskVisualization = 1` (clicking a grouped icon shows the window
-previews instead of cycling). `0` cycles, `2` runs Present Windows, `3` shows a
-textual list.
+Two unrelated panel preferences live in their own script,
+`plasma/setup.sh` (run once, and again with `--force` if the panel or the
+system tray is recreated):
+
+- icons-only task manager: `groupedTaskVisualization = 1`, so clicking a
+  grouped icon shows the window previews instead of cycling (`0` cycles,
+  `2` runs Present Windows, `3` shows a textual list)
+- system tray battery: `showPercentage = true`, the charge badge on the icon
+
+They are keyed by containment/applet ids that plasmashell assigns at runtime,
+so the script finds them by plugin name. plasma-manager cannot declare them:
+its `configFile` for `plasma-org.kde.plasma.desktop-appletsrc` is typed
+(`value`/`immutable`/`persistent` per containment) and applet configs are
+nested applets, not panel widgets.
 
 ### SSH / web
 

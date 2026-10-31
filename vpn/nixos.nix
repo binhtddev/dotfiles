@@ -1,16 +1,22 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
-  # strongSwan daemon + swanctl client. The connection and private key live
-  # outside the nix store so nothing secret ends up in the configuration;
-  # vpn/setup.sh writes /etc/swanctl/tma.conf and the certificates.
+  # strongSwan: the connection and private key live outside the nix store so
+  # nothing secret ends up in the configuration; vpn/setup.sh writes
+  # /etc/swanctl/tma.conf and the certificates.
   #
-  # The daemon starting at boot does NOT dial anything: the child in
-  # ../vpn/swanctl.conf has `start_action = none`, so a tunnel exists only
-  # after an explicit `vpn.sh up` (badge / KRunner).
+  # Nothing is dialled implicitly: the child in ../vpn/swanctl.conf has
+  # `start_action = none`, so a tunnel only exists after an explicit
+  # `vpn.sh up` (badge / KRunner).
   services.strongswan-swanctl = {
     enable = true;
     includes = [ "/etc/swanctl/tma.conf" ];
   };
+
+  # Keep charon off the boot path as well: without `wantedBy` the daemon is not
+  # started at login, vpn-root.sh starts it on the first connect. This also
+  # removes the only consumer of network-online.target, so boot no longer waits
+  # ~6 s for NetworkManager-wait-online.
+  systemd.services.strongswan-swanctl.wantedBy = lib.mkForce [ ];
 
   # NixOS only puts strongswan on the daemon's own PATH, and swanctl lives in
   # sbin, so expose it (and openssl, used by setup.sh) to the system profile.
