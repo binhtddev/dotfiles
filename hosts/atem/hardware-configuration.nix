@@ -92,12 +92,11 @@
   };
 
   fileSystems."/mnt/data" = {
-    device = "/dev/disk/by-uuid/D8EA6F43EA6F1CCE";
-    fsType = "ntfs3";
+    device = "/dev/disk/by-uuid/6f0e250c-eff0-4cff-810c-6ffc0b34b438";
+    fsType = "ext4";
     options = [
-      "uid=1000"
-      "gid=100"
-      "umask=0022"
+      "noatime"
+      "nofail"
     ];
   };
 
