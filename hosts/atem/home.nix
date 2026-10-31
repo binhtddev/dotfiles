@@ -32,7 +32,6 @@ in
     ../../home/desktop/common.nix
     # ../../home/i3status.nix
     ../../home/plasma.nix
-    ../../home/systemd/eye-strain.nix
     ../../home/vpn.nix
 
     ../../home/dev/bun.nix
