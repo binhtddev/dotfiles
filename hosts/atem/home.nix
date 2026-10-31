@@ -35,6 +35,7 @@ in
     ../../home/systemd/eye-strain.nix
     ../../home/vpn.nix
 
+    ../../home/dev/bun.nix
     ../../home/dev/go.nix
     ../../home/dev/moonbit.nix
     ../../home/dev/python.nix
