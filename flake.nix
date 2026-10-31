@@ -15,11 +15,6 @@
     # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'stable-packages' overlay at 'overlays/default.nix'
 
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
@@ -120,10 +115,7 @@
         };
         atem = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            inputs.plasma-manager.homeModules.plasma-manager
-            ./hosts/atem/home.nix
-          ];
+          modules = [ ./hosts/atem/home.nix ];
           extraSpecialArgs = {
             inherit inputs outputs;
           };
