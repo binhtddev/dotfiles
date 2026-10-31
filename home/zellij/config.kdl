@@ -423,8 +423,12 @@ pane_frames false
 // Enable or disable support for the enhanced Kitty Keyboard Protocol (the host terminal must also support it)
 // (Requires restart)
 // Default: true (if the host terminal supports it)
-// 
-support_kitty_keyboard_protocol false
+//
+// Alacritty supports it (ESC [ ? 0 u answers the flags query), so leave the
+// default on: it is what lets modified Enter reach applications as
+// `shift+return` / `ctrl+return` instead of an indistinguishable plain Enter
+// (opencode needs it for its "insert newline" binding).
+// support_kitty_keyboard_protocol false
  
 // Whether to stack panes when resizing beyond a certain size
 // Default: true
